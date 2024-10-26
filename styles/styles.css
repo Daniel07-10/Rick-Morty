@@ -8,32 +8,45 @@ body{
     width: 100vw;
     height: 100vh;
     background-color: #272B33;
+
 }
 main{
     display: flex;
-    align-items: center;
-    justify-content: center;
+    
     width: 100%;
     height: 100%;
 }
 
+
+
 #container{
     display: flex;
-    gap: 3rem;
-    
-    width: 30%;
-    height: 30%;
-    background-color: #3C3E44;
-    border-radius: 15px;
-    border: dashed white 5px;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
-#container > div {
+
+#card{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    gap: 1rem;
+    width: 30%;
+    height: 25%;
+    background-color: #3C3E44;
+    border-radius: 10px;
+    border: 2px double gray;
+}
+
+#card > img {
+    border-radius: 7px 0px 0px 7px;
 }
 
 h2,h3,h4{
     color: white;
     margin-bottom: 1rem;
+}  
+
+#paragraphs{
+    padding: 0.5rem;
+}
+h2{
+    color: #FFD700;;
 }
