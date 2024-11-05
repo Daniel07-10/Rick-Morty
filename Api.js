@@ -3,12 +3,13 @@ fetch('https://rickandmortyapi.com/api/character')
   .then(data => {
     const characters = data.results;
     const container = document.querySelector('#container');
+    const searchInput = document.querySelector('#search-input');
 
+    // Función para crear las tarjetas de los personajes
     function makeCard(character) {
       const card = document.createElement('div');
-      card.id = 'card'; // Añadimos el id para el estilo
+      card.id = 'card';
 
-      
       const imgCard = document.createElement('img');
       imgCard.src = character.image;
       imgCard.alt = character.name;
@@ -35,14 +36,28 @@ fetch('https://rickandmortyapi.com/api/character')
       divParagraphs.appendChild(statusContainer);
       divParagraphs.appendChild(specieContainer);
 
-      return card; // Devolvemos la tarjeta creada
+      return card;
     }
 
-    // Recorremos el array de personajes y creamos las tarjetas
-    characters.forEach(character => {
-      const card = makeCard(character);
-      container.appendChild(card);
+    // Función para mostrar los personajes filtrados
+    function displayCharacters(filteredCharacters) {
+      container.innerHTML = ''; // Limpiar el contenedor antes de añadir nuevos elementos
+      filteredCharacters.forEach(character => {
+        const card = makeCard(character);
+        container.appendChild(card);
+      });
+    }
+
+    // Inicialmente mostramos todos los personajes
+    displayCharacters(characters);
+
+    // Filtrar personajes en tiempo real al escribir en el input
+    searchInput.addEventListener('input', () => {
+      const searchTerm = searchInput.value.toLowerCase();
+      const filteredCharacters = characters.filter(character => 
+        character.name.toLowerCase().includes(searchTerm)
+      );
+      displayCharacters(filteredCharacters); // Mostrar los personajes filtrados
     });
   })
-  
   .catch(err => console.error(err));
